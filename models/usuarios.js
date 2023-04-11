@@ -19,6 +19,7 @@ const Usuarios = sequelize.define('usuarios', {
     email:{
         type: Sequelize.STRING,
         allowNull: false,
+        indexes:[{unique: true}]
     },
     nombreUser:{
         type: Sequelize.STRING,
@@ -30,7 +31,6 @@ const Usuarios = sequelize.define('usuarios', {
     },
     estado:{
         type: Sequelize.BOOLEAN,
-        allowNull: false,
     }
 });
 

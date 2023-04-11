@@ -1,0 +1,42 @@
+<div class="puestos-container">
+    <div class="over-circle">
+        <div class="biggest"></div>
+        <div class="smallest"></div>
+    </div>
+    <div class="fake-logo">
+        <p class="logu">YJE</p>
+    </div>
+    <div class="partidos-info">
+    <h4>Bienvenido a los partidos! <i class="fa-solid fa-hand-fist"></i></h4>
+    <p>Aqui veras todos los partidos ya creados:</p>
+    </div>
+    <div class="puestos-container inside-partidos">
+        <!--Aqui comienza-->
+        <div class="real-container">
+            {{#each partidos as |partido|}}
+            <div class="partido-container">
+            <div class="parti-maintenance">
+                <a href="/edit-partido/{{partido.id}}?edit=true" class="parti-edit"><i class="fa-solid fa-pen parti-edit"></i></a>
+                <form action="/delete-partido" method="post">
+                    <input type="hidden" name="partidoId" id="partido" value="{{partido.id}}">
+                    <button class="delete-btn de-parti"><i class="fa-solid fa-trash de-parti"></i></button>
+                </form>
+            </div>
+            <div class="logo-container">
+                <img src="{{partido.logo}}" alt="Logo" class="img-parti">
+            </div>
+            <div class="titainer">
+                <h5 class="parti-title">{{partido.nombre}}</h5>
+            </div>
+            <div class="information">
+                <p class="info">{{partido.descripcion}}</p>
+            </div>
+        </div>
+        {{/each}}
+        </div>
+            <div class="creating">
+                <a href="/create-partido" class="linku">Crea un nuevo partido</a>
+            </div>
+        
+    </div>
+</div>

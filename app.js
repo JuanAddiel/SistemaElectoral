@@ -3,7 +3,8 @@ const express = require('express');
 const sequelize = require('./context/appContext');
 const {engine} = require('express-handlebars');
 const errorController = require('./controllers/ErrorController');
-
+const session = require('express-session');
+const flash = require('connect-flash');
 //Modulos or Tables
 const candidatos = require('./models/candidatos');
 const puestoElectivo = require('./models/puestoElectivo');
@@ -28,6 +29,47 @@ app.set('views', 'views');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+    session({ secret: "anything", resave: true, saveUninitialized: false })
+  );
+  
+  app.use(flash());
+  
+  app.use((req, res, next) => {
+    if (!req.session) {
+      return next();
+    }
+    if (!req.session.user) {
+      return next();
+    }
+    usuarios.findByPk(req.session.user.id)
+      .then((user) => {
+        req.user = user;
+        next();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  app.use((req, res, next) => {
+    const errors = req.flash("errors");  
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.errorMessages = errors;
+    res.locals.hasErrorMessages = errors.length > 0;
+    next();
+  });
+
+  
+const autorRoute = require("./routes/autorRoute");
+
+const candidatoRouter = require('./routes/candidatos');
+const partidoRouter = require('./routes/partidos');
+
+app.use(autorRoute);
+app.use(candidatoRouter);
+app.use(partidoRouter);
+
 app.use("/", errorController.Get404);
 
 

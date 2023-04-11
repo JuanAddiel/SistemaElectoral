@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-primary text-light">
+        Crear usuario
+      </div>
+      <div class="card-body">
+        <form action="/signup" method="POST">
+          <div class="mb-3">
+            <label for="name-input" class="form-label">
+              Nombre
+            </label>
+            <input type="text" class="form-control" id="name-input" name="name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="apellido-input" class="form-label">
+              Apellido
+            </label>
+            <input type="text" class="form-control" id="apellido-input" name="apellido" />
+          </div>
+          <div class="mb-3">
+            <label for="usuario-input" class="form-label">
+              Usuario
+            </label>
+            <input type="text" class="form-control" id="usuario-input" name="nombreUser" />
+          </div>
+          <div class="mb-3">
+            <label for="email-input" class="form-label">
+              Email address
+            </label>
+            <input type="email" class="form-control" id="email-input" name="email" />
+          </div>
+          <div class="mb-3">
+            <label for="password-input" class="form-label">
+              Password
+            </label>
+            <input type="password" class="form-control" id="password-input" name="password" />
+          </div>
+          <div class="mb-3">
+            <label for="confirm-password-input" class="form-label">
+              Confirm Password
+            </label>
+            <input type="password" class="form-control" id="confirm-password-input" name="confirmPassword" />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Create
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
