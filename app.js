@@ -1,7 +1,9 @@
 const path = require('path');
 const express = require('express');
 const sequelize = require('./context/appContext');
-const {engine} = require('express-handlebars');
+const {
+    engine
+} = require('express-handlebars');
 const errorController = require('./controllers/ErrorController');
 
 //Modulos or Tables
@@ -12,9 +14,11 @@ const elecciones = require('./models/elecciones');
 const ciudadanos = require('./models/ciudadanos');
 const usuarios = require('./models/usuarios');
 
+const ciudadano = require("./routes/ciudadanosRouter");
+const puestoElectivos = require("./routes/puestoElectivoRouter");
 
 
-const app= express();
+const app = express();
 app.engine(
     'hbs',
     engine({
@@ -26,21 +30,34 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+    extended: false
+}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(ciudadano);
+app.use(puestoElectivos);
 app.use("/", errorController.Get404);
 
 
 //Relaciones que tienen
-candidatos.belongsTo(puestoElectivo,{constraint: true, onDelete:"CASCADE"});
+candidatos.belongsTo(puestoElectivo, {
+    constraint: true,
+    onDelete: "CASCADE"
+});
 puestoElectivo.hasMany(candidatos);
 
-candidatos.belongsTo(partidos,{constraint: true, onDelete:"CASCADE"});
+candidatos.belongsTo(partidos, {
+    constraint: true,
+    onDelete: "CASCADE"
+});
 partidos.hasMany(candidatos);
 
 
-sequelize.sync(/*{alter:true}*/).then(result=>{
+sequelize.sync({
+    /*alter: true*/
+}).then(result => {
     app.listen(3000);
-}).catch(err=>{
+}).catch(err => {
     console.log(err);
 })

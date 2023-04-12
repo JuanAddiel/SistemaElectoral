@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../context/appContext');
 
 const Ciudadanos = sequelize.define('ciudadanos', {
-    documentoIdentidad:{
+    documentoIdentidad: {
         type: Sequelize.STRING,
         allowNull: false,
         primaryKey: true
@@ -15,13 +15,14 @@ const Ciudadanos = sequelize.define('ciudadanos', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    email:{
+    email: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    estado:{
+    estado: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true
     }
 });
 
