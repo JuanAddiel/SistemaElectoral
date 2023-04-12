@@ -1,0 +1,50 @@
+<main>
+         <section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Puesto Electivo.</h1>
+      <p class="lead text-muted">Cree un Puesto Electivo.</p>
+      <p>
+        <a href="/puestoElectivo-save" class="btn p-2 mb-2 bg-primary text-white">Crear Puesto Electivo</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+
+{{#if hasPuestoElectivo}}
+
+{{#each puestoElectivo as |electivo|}}
+
+<div class="col-md-4 mt-5">
+
+   <div class="card bg-dark text-light" style="width: 18rem;">   
+  <div class="card-body">
+    <h5 class="card-title">Nombre: {{electivo.nombre}}</h5>
+    <h5 class="card-title">Descripcion: {{electivo.descripcion}}</h5>
+    <h5 class="card-title">Estado: {{#if electivo.estado}}Activo{{else}}Inactivo{{/if}}</h5>
+        
+    <br>
+
+    <form class="form-inline" id="form-delete" action="/puestoElectivo-delete/{{electivo.id}}" method="post">
+      <input type="hidden" name="id" value="{{electivo.id}}">
+      <button type="submit" class=" btn btn-danger mx-2 puestoElectivo-delete" >Eliminar</button>
+      <a class=" btn btn-success" href="/puestoElectivo-update/{{electivo.id}}?edit=true">Editar</a>       
+    </form>
+  </div>
+</div>
+</div>
+
+{{/each}}
+
+{{else}}
+
+<h1 class=" text-danger ">No hay Puesto Electivo Creados</h1>
+
+{{/if}}
+
+</div>
+</div>
+
+</main>
