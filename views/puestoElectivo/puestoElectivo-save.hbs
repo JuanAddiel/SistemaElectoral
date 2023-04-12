@@ -1,0 +1,35 @@
+<main>
+  <div class="card">
+    <div class="card-header p-3 mb-2 bg-success text-white">
+      <h2 class=" text-center  ">Agregar Puesto Electivo</h2>
+    </div>
+
+    <div class="card-body">
+
+      <form method="POST" action="{{#if editMode}}/puestoElectivo-update/{{PuestoElectivo.id}}{{else}}/puestoElectivo-save{{/if}}">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" value="{{#if editMode}}{{PuestoElectivo.nombre}}{{/if}}" />
+        </div>
+
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripcion:</label>
+          <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{#if editMode}}{{PuestoElectivo.descripcion}}{{/if}}" />
+        </div>
+
+         <div class="mb-3">
+          <label for="estado">Estado:</label><br>
+          <input type="radio" name="estado" value="activo" checked>Activo<br>
+          <input type="radio" name="estado" value="inactivo" checked>Inactivo<br>
+        </div> 
+        <div>
+
+        {{#if editMode}}
+          <input type="hidden" value="{{PuestoElectivo.id}}" name="id">
+        {{/if}}
+
+        <button id="enviar" type="submit" class="btn btn-primary">{{#if editMode}}Update{{else}}Add{{/if}}</button>
+      </form>
+    </div>
+  </div>
+</main>

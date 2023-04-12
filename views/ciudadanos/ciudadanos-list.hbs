@@ -1,0 +1,57 @@
+<main>
+         <section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Ciudadanos.</h1>
+      <p class="lead text-muted">Cree el Ciudadanos.</p>
+      <p>
+        <a href="/ciudadanos-save" class="btn p-2 mb-2 bg-primary text-white">Crear Ciudadanos</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+
+{{#if hasCiudadano}}
+
+{{#each ciudadano as |Ciudadano|}}
+
+<div class="col-md-4 mt-5">
+
+   <div class="card bg-dark text-light" style="width: 18rem;">   
+    <div class="card-body">
+        <h5 class="card-title">Documento Identidad: {{Ciudadano.documentoIdentidad}}</h5>
+        <h5 class="card-title">Nombre: {{Ciudadano.nombre}}</h5>
+        <h5 class="card-title">Apellido: {{Ciudadano.apellido}}</h5>
+        <h5 class="card-title">Email: {{Ciudadano.email}}</h5>
+        <h5 class="card-title">Estado: {{#if Ciudadano.estado}}activo{{else}}inactivo{{/if}}</h5>
+
+        
+        
+        <br>
+
+        <form class="form-inline" id="form-delete" action="/ciudadanos-delete/{{Ciudadano.documentoIdentidad}}" method="post">
+          <button type="submit" class=" btn btn-danger mx-2 ciudadanos-delete" >Eliminar</button>
+          <a class=" btn btn-success" href="/ciudadanos-update/{{Ciudadano.documentoIdentidad}}?edit=true">Editar</a>       
+        </form>
+
+    </div>
+
+
+</div>
+
+</div>
+
+{{/each}}
+
+{{else}}
+
+<h1 class=" text-danger ">No hay Ciudadanos creados</h1>
+
+{{/if}}
+
+</div>
+</div>
+
+</main>
