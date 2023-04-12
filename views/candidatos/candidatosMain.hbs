@@ -1,0 +1,52 @@
+<div class="puestos-container">
+    <div class="right-lines">
+        <div class="top-line line"></div>
+        <div class="middle-line line"></div>
+        <div class="bottom-line line"></div>
+    </div>
+    <div class="Puestos-info">
+        <h4>Bienvenido a los candidatos!</h4>
+        <p>Aqui veras todos los candidatos para el puesto que elejiste:</p>
+    </div>
+    <div class="multiple-dividor">
+        <div class="left-dividor"></div>
+        <div class="right-dividor"></div>
+    </div>
+    <div class="puestos-list">
+        <!-- aqui comienza el elemento del candidato -->
+        <div class="candidato">
+            <div class="cont-candi">
+                <div class="img-container">
+                    <img src="https://robertocavada.com/wp-content/uploads/2022/06/IMG-20220612-WA0054.jpg" alt="candidato img" class="candi-img">
+                </div>
+                <div class="candi-info">
+                    <h5 class="title-candi">Leonel</h5>
+                    <p class="Capellido">Vicioso</p>
+                    <div class="candi-dividor"></div>
+                    <p class="Cpuesto">Puesto: Presidente</p>
+                    <div class="candi-dividor"></div>
+                    <p class="Cpartido">Partido: PLD</p>
+                </div>
+                <div class="candi-maintenance">
+                    <div class="candi-focus">
+                        <i class="fa-solid fa-thumbtack"></i>
+                    </div>
+                    <div class="dele-edi">
+                        <a href="/edit-candidato/1?edit=true" class="candi-edit"><i class="fa-solid fa-pen"></i></a>
+                        <form action="/delete-candidato" method="post" class="candi-form">
+                            <input type="hidden" name="candidatoId" value="1">
+                            <button class="candi-delete"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="create-section">
+        <a href="/create-candidato" class="create-puesto">
+        <div class="puesto-btn">
+            <p class="createIt">Crear nuevo candidato ></p>
+        </div>
+    </a>
+    </div>
+</div>

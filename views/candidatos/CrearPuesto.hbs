@@ -1,0 +1,30 @@
+<div class="puestos-container">
+    <div class="circle-container">
+        <div class="green-circle circle"></div>
+        <div class="yellow-circle circle"></div>
+        <div class="red-circle circle"></div>
+    </div>
+    <div class="Puestos-info">
+        <h4>{{#if editMode}}Edite el puesto{{else}}Cree aquí un nuevo puesto{{/if}} 📋</h4>
+        <p>Super facil! :)</p>
+    </div>
+    <div class="form-container">
+        <form action="{{#if editMode}}/edit-puesto{{else}}/create-puesto{{/if}}" method="post">
+            <div class="form-section">
+                <label for="nombre" class="puesto-label"><i class="fa-regular fa-file"></i></label>
+                <input type="text" placeholder="Inserte el nombre del puesto" id="nombre" class="puesto-input" name="nombre" value="{{#if editMode}}{{puestos.nombre}}{{/if}}">
+            </div>
+            <div class="form-section">
+                <label for="descripcion" class="puesto-label"><i class="fa-regular fa-pen-to-square"></i></label>
+                <input type="text" placeholder="Inserte la descripción del puesto" id="descripcion" class="puesto-input" name="descripcion" value="{{#if editMode}}{{puestos.descripcion}}{{/if}}">
+            </div>
+            {{#if editMode}}
+            <input type="hidden" name="puestoId" value="{{puestos.id}}">
+            {{/if}}
+            <div class="puestos-buttons">
+                <a href="/puestos" type="button" class="GoBack send-puesto">Ir atrás</a>
+                <button type="submit" class="send-puesto">{{#if editMode}}Editar{{else}}Crear{{/if}} puesto</button>
+            </div>
+        </form>
+    </div>
+</div>  
