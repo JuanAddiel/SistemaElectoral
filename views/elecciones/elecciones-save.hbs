@@ -1,0 +1,32 @@
+<div class="puestos-container">
+    <div class="circle-container">
+        <div class="green-circle circle"></div>
+        <div class="yellow-circle circle"></div>
+        <div class="red-circle circle"></div>
+    </div>
+    <div class="Puestos-info">
+        <h4>{{#if editMode}}Edite el Eleccion{{else}}Cree aquí una nueva eleccion{{/if}} 📋</h4>
+        <p>{{#if editMode}}No hay error que no se pueda corregir <i class="fa-solid fa-clover"></i>{{else}}Suerte, nueva
+            eleccion! <i class="fa-solid fa-clover"></i>{{/if}}</p>
+    </div>
+    <div class="form-container">
+        <form action="{{#if editMode}}/elecciones-edit{{else}}/elecciones-post{{/if}}" method="post">
+
+            <div class="form-section">
+                <label for="nombre" class="puesto-label"><i class="fa-solid fa-diamond"></i></i></label>
+                <input type="text" placeholder="Nombre de la Eleccion" id="nombre" class="puesto-input" name="nombre"
+                    value="{{#if editMode}}{{candidatos.nombre}}{{/if}}">
+            </div>
+            <div class="form-section">
+                <label for="fecha" class="puesto-label"><i class="fa-solid fa-file-signature"></i></label>
+                <input type="text" placeholder="Fecha" id="fecha" class="puesto-input"
+                    name="fechaRealizacion" value="{{#if editMode}}{{candidatos.apellido}}{{/if}}">
+            </div>
+         <div class="puestos-buttons">
+                <a href="/elecciones" type="button" class="GoBack send-puesto">Ir atrás</a>
+                <button type="submit" class="send-puesto">{{#if editMode}}Editar{{else}}Crear{{/if}} Eleccion</button>
+            </div>
+        </form>
+
+    </div>
+</div>

@@ -7,22 +7,33 @@
         <p class="logu">YJE</p>
     </div>
     <div class="partidos-info">
-    <h4>{{#if editMode}}Edita{{else}}Crea{{/if}} un partido <i class="fa-solid fa-hand-fist"></i></h4>
-    <p>{{#if editMode}}Edita{{else}}Inserta{{/if}} la informacion aqui debajo:</p>
+        <h4>{{#if editMode}}Edita{{else}}Crea{{/if}} un partido <i class="fa-solid fa-hand-fist"></i></h4>
+        <p>{{#if editMode}}Edita{{else}}Inserta{{/if}} la informacion aqui debajo:</p>
     </div>
     <div class="form-container">
-        <form action="{{#if editMode}}/edit-partido{{else}}/create-partido{{/if}}" method="post">
+        <form enctype="multipart/form-data" action="{{#if editMode}}/edit-partido{{else}}/create-partido{{/if}}"
+            method="post">
             <div class="form-section">
                 <label for="nombre" class="puesto-label"><i class="fa-regular fa-file"></i></label>
-                <input type="text" placeholder="Nombre, ej: Partido Revolucionario Dominicano" id="nombre" class="puesto-input" name="nombre" value="{{#if editMode}}{{partidos.nombre}}{{/if}}">
+                <input type="text" placeholder="Nombre, ej: Partido Revolucionario Dominicano" id="nombre"
+                    class="puesto-input" name="nombre" value="{{#if editMode}}{{partidos.nombre}}{{/if}}">
             </div>
             <div class="form-section">
                 <label for="descripcion" class="puesto-label"><i class="fa-regular fa-pen-to-square"></i></label>
-                <input type="text" placeholder="Descripcion del partido" id="descripcion" class="puesto-input" name="descripcion" value="{{#if editMode}}{{partidos.descripcion}}{{/if}}">
+                <input type="text" placeholder="Descripcion del partido" id="descripcion" class="puesto-input"
+                    name="descripcion" value="{{#if editMode}}{{partidos.descripcion}}{{/if}}">
             </div>
             <div class="form-section">
-                <label for="logo" class="puesto-label"><i class="fa-solid fa-link"></i></i></label>
-                <input type="text" placeholder="Inserte la URL del logo del partido" id="logo" class="puesto-input" name="logo" value="{{#if editMode}}{{partidos.logo}}{{/if}}">
+                <label for="image" class="puesto-label"><i class="fa-solid fa-link"></i></i></label>
+                <input type="file" placeholder="Inserte la URL del logo del partido" id="image" class="puesto-input"
+                    name="Imagen" value="{{#if editMode}}{{partidos.logo}}{{/if}}">
+            </div>
+            <div class="form-section">
+                <label for="estado">Estado:</label><br>
+                <input type="radio" name="estado" value="activo" {{#if (equalValue partidos.estado true)}}
+                    checked{{/if}}>Activo<br>
+                <input type="radio" name="estado" value="inactivo" {{#if (equalValue partidos.estado false)}}
+                    checked{{/if}}>Inactivo<br>
             </div>
             {{#if editMode}}
             <input type="hidden" name="puestoId" value="{{partidos.id}}">

@@ -19,8 +19,8 @@
 
          <div class="mb-3">
           <label for="estado">Estado:</label><br>
-          <input type="radio" name="estado" value="activo" checked>Activo<br>
-          <input type="radio" name="estado" value="inactivo" checked>Inactivo<br>
+          <input type="radio" name="estado" value="activo" {{#if (equalValue PuestoElectivo.estado true)}} checked{{/if}} >Activo<br>
+          <input type="radio" name="estado" value="inactivo" {{#if (equalValue PuestoElectivo.estado false)}} checked{{/if}} >Inactivo<br>
         </div> 
         <div>
 

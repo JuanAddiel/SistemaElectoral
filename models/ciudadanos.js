@@ -2,10 +2,15 @@ const Sequelize = require('sequelize');
 const sequelize = require('../context/appContext');
 
 const Ciudadanos = sequelize.define('ciudadanos', {
+    id:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
     documentoIdentidad: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
     },
     nombre: {
         type: Sequelize.STRING,

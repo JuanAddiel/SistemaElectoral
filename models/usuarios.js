@@ -12,7 +12,7 @@ const Usuarios = sequelize.define('usuarios', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    apellido: {
+    documentoIdentidad: {
         type: Sequelize.STRING,
         allowNull: false,
     },
@@ -31,7 +31,20 @@ const Usuarios = sequelize.define('usuarios', {
     },
     estado:{
         type: Sequelize.BOOLEAN,
-    }
+    },
+    role: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'ciudadano', // valor predeterminado del rol
+      },
+    resetToken: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+    resetTokenExpiration: {
+        type: Sequelize.DATE,
+        allowNull: true,
+    },
 });
 
 module.exports = Usuarios;

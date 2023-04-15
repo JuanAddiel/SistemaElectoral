@@ -1,0 +1,48 @@
+<div class="puestos-container">
+    <div class="circle-container">
+        <div class="green-circle circle"></div>
+        <div class="yellow-circle circle"></div>
+        <div class="red-circle circle"></div>
+    </div>
+    <div class="Puestos-info">
+        <h4>Bienvenido a las elecciones!</h4>
+        <p>Aqui veras todas las elecciones para ver resultados:</p>
+    </div>
+    <div class="dividor"></div>
+    <div class="puestos-list">
+
+        {{#each elecciones as |el|}}
+
+        <a href="/resultados/?id={{el.id}}">
+            <!--/{{puesto.id}} para obtener el id con el que estaba trabajando en el controlador exports.Candidatos-->
+
+            <div class="puestos">
+                <div class="left-color"></div>
+                <div class="right-color"></div>
+                <div>
+                    <p>{{el.nombre}}</p>
+                    <p class="descripcion">{{el.fechaRealizacion}}</p>
+                    <p>{{#if el.estado}}<span class="badge bg-success">Activo</span>{{else}}<span
+                            class="badge bg-danger">Inactivo</span>{{/if}}</p>
+
+                </div>
+        </a>
+        {{#if el.estado}}
+        <form action="/elecciones/{{el.id}}" method="POST">
+            <button class="btn p-2 mb-2 bg-danger text-white">Finalizar</button>
+        </form>
+        {{/if}}
+    </div>
+    {{/each}}
+
+
+</div>
+
+
+
+{{#if activeEleccion}}
+{{else}}
+<a href="/elecciones-get" class="btn btn-primary">Agregar</a>
+{{/if}}
+</div>
+</div>

@@ -6,51 +6,41 @@
 
     <div class="card-body">
 
-      <form method="POST" action="{{#if editMode}}/ciudadanos-update/{{Ciudadanos.documentoIdentidad}}{{else}}/ciudadanos-save{{/if}}">
+      <form method="POST" action="{{#if editMode}}/ciudadanos-update{{else}}/ciudadanos-save{{/if}}">
+      
         <div class="mb-3">
           <label for="documentoIdentidad" class="form-label">Documento Identidad:</label>
-          <input type="text" class="form-control" id="documentoIdentidad" name="documentoIdentidad" value="{{#if editMode}}{{Ciudadanos.documentoIdentidad}}{{/if}}" />
-        </div>
-
-        <div class="campo-nuevo-documento d-none">
-          <label for="nuevoDocumentoIdentidad">Nuevo documento de identidad:</label>
-          <input type="text" class="form-control" id="nuevoDocumentoIdentidad" name="nuevoDocumentoIdentidad" >
+          <input type="text" class="form-control" id="documentoIdentidad" name="documentoIdentidad" value="{{#if editMode}}{{Ciudadano.documentoIdentidad}}{{/if}}" />
         </div>
 
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" value="{{#if editMode}}{{Ciudadanos.nombre}}{{/if}}" />
+          <input type="text" class="form-control" id="nombre" name="nombre" value="{{#if editMode}}{{Ciudadano.nombre}}{{/if}}" />
         </div>
 
         <div class="mb-3">
           <label for="apellido" class="form-label">Apellido:</label>
-          <input type="text" class="form-control" id="apellido" name="apellido" value="{{#if editMode}}{{Ciudadanos.apellido}}{{/if}}" />
+          <input type="text" class="form-control" id="apellido" name="apellido" value="{{#if editMode}}{{Ciudadano.apellido}}{{/if}}" />
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" name="email" value="{{#if editMode}}{{Ciudadanos.email}}{{/if}}" />
+          <input type="email" class="form-control" id="email" name="email" value="{{#if editMode}}{{Ciudadano.email}}{{/if}}" />
         </div>
 
-        <div class="mb-3">
+       <div class="mb-3">
           <label for="estado">Estado:</label><br>
-          <input type="radio" name="estado" value="activo" checked>Activo<br>
-          <input type="radio" name="estado" value="inactivo" checked>Inactivo<br>
+          <input type="radio" name="estado" value="activo" {{#if (equalValue Ciudadano.estado true)}} checked{{/if}} >Activo<br>
+          <input type="radio" name="estado" value="inactivo" {{#if (equalValue Ciudadano.estado false)}} checked{{/if}} >Inactivo<br>
         </div>   
 
         {{#if editMode}}
-          <input type="hidden" value="{{Ciudadanos.documentoIdentidad}}" name="documentoIdentidad">
+          <input type="hidden" value="{{Ciudadano.id}}" name="id">
         {{/if}}
 
-        <button id="enviar" type="submit" class="btn btn-primary">{{#if editMode}}Update{{else}}Add{{/if}}</button>
+        <button type="submit" class="btn btn-primary">{{#if editMode}}Update{{else}}Add{{/if}}</button>
       </form>
     </div>
   </div>
 </main>
 
-<script>
-  // Mostrar el campo "Nuevo documento de identidad" si se está editando un ciudadano
-  if ("{{editMode}}" === "true") {
-    document.querySelector(".campo-nuevo-documento").classList.remove("d-none");
-  }
-</script>

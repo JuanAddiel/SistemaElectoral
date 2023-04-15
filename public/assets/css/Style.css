@@ -255,6 +255,7 @@ color: #C0392B;
 border: none;
 background: none;
 }
+
 .right-lines{
 position: absolute;
  height: 80%;
@@ -295,6 +296,12 @@ justify-content: space-between;
 .left-dividor{
 border-radius: 14px;
 width: 65%;
+height: 1vh;
+background: #E5E7E9;
+}
+.center-dividor{
+border-radius: 14px;
+width: 32%;
 height: 1vh;
 background: #E5E7E9;
 }

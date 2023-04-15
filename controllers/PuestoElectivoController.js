@@ -1,5 +1,8 @@
 const Sequelize = require("../context/appContext");
 const PuestoElectivo = require("../models/puestoElectivo");
+const Candidato = require("../models/candidatos");
+const Partidos = require("../models/partidos");
+
 
 exports.GetPuestoElectivo = (req, res, next) => {
     PuestoElectivo.findAll()
@@ -52,10 +55,10 @@ exports.GetUpdatePuestoElectivo = (req, res, next) => {
         return res.redirect("/puestoElectivo");
     }
     PuestoElectivo.findOne({
-            where: {
-                id: id
-            }
-        })
+        where: {
+            id: id
+        }
+    })
         .then((result) => {
             const puestoElectivo = result.dataValues;
 
@@ -81,14 +84,14 @@ exports.PostUpdatePuestoElectivo = (req, res, next) => {
     const estado = req.body.estado === "activo";
 
     PuestoElectivo.update({
-            nombre,
-            descripcion,
-            estado,
-        }, {
-            where: {
-                id: id,
-            },
-        })
+        nombre,
+        descripcion,
+        estado,
+    }, {
+        where: {
+            id: id,
+        },
+    })
         .then(() => {
             res.redirect("/puestoElectivo");
         })
@@ -102,10 +105,10 @@ exports.PostUpdatePuestoElectivo = (req, res, next) => {
 exports.PostDeletePuestoElectivo = (req, res, next) => {
     const id = req.params.id;
     PuestoElectivo.destroy({
-            where: {
-                id: id
-            }
-        })
+        where: {
+            id: id
+        }
+    })
         .then((result) => {
             res.redirect("/puestoElectivo");
         })

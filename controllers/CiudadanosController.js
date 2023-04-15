@@ -33,14 +33,13 @@ exports.PostSaveCiudadanos = (req, res, next) => {
     const email = req.body.email;
     const estado = (req.body.estado === 'activo');
 
-    const Ciudadano = new Ciudadanos({
-        documentoIdentidad,
-        nombre,
-        apellido,
-        email,
-        estado
-    });
-    Ciudadano.save().then(result => {
+    Ciudadanos.create({
+        documentoIdentidad: documentoIdentidad,
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        estado: estado
+    }).then(result => {
         res.redirect("/ciudadanos");
         console.log(result);
     }).catch(error => {
@@ -50,17 +49,17 @@ exports.PostSaveCiudadanos = (req, res, next) => {
 
 exports.GetUpdateCiudadano = (req, res, next) => {
     const edit = req.query.edit;
-    const documentoIdentidad = req.params.documentoIdentidad; // Obtener el documentoIdentidad de los parámetros de la URL
+    const Ciudadanoid = req.params.id;
 
     if (!edit) {
         return res.redirect("/ciudadanos");
     }
 
     Ciudadanos.findOne({
-            where: {
-                documentoIdentidad: documentoIdentidad
-            }
-        })
+        where: {
+            id: Ciudadanoid
+        }
+    })
         .then((result) => {
             const ciudadano = result.dataValues;
 
@@ -70,7 +69,7 @@ exports.GetUpdateCiudadano = (req, res, next) => {
 
             res.render("ciudadanos/ciudadanos-save", {
                 pageTitle: "Editar ciudadano",
-                Ciudadanos: ciudadano,
+                Ciudadano: ciudadano,
                 editMode: edit,
                 ciudadanoActive: true,
             });
@@ -82,57 +81,39 @@ exports.GetUpdateCiudadano = (req, res, next) => {
 
 
 exports.PostUpdateCiudadano = (req, res, next) => {
-    const documentoIdentidad = req.params.documentoIdentidad;
-    Ciudadanos.findOne({
+    const Ciudadanoid = req.body.id;
+    const docId = req.body.documentoIdentidad;
+    const nombre = req.body.nombre;
+    const apellido = req.body.apellido;
+    const email = req.body.email;
+    const estado = req.body.estado === "activo";
+    Ciudadanos.update({
+        documentoIdentidad: docId,
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        estado: estado
+    },
+        {
             where: {
-                documentoIdentidad: documentoIdentidad
+                id: Ciudadanoid
             }
         })
         .then(ciudadano => {
-            if (ciudadano) {
-                const nuevoDocId = req.body.nuevoDocumentoIdentidad;
-                const docId = nuevoDocId ? nuevoDocId : ciudadano.documentoIdentidad;
-                const nombre = req.body.nombre;
-                const apellido = req.body.apellido;
-                const email = req.body.email;
-                const estado = req.body.estado === "activo";
-
-                Ciudadanos.update({
-                        documentoIdentidad: docId,
-                        nombre,
-                        apellido,
-                        email,
-                        estado
-                    }, {
-                        where: {
-                            documentoIdentidad: documentoIdentidad
-                        }
-                    })
-                    .then(() => {
-                        res.redirect("/ciudadanos");
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        next();
-                    });
-            } else {
-                console.log(`No se encontró un ciudadano con documentoIdentidad ${documentoIdentidad}`);
-                next();
-            }
+            res.redirect("/ciudadanos");
         })
-        .catch(error => {
-            console.log(error);
-            next();
-        });
+        .catch(err => {
+            console.log(err);
+        })
 };
 
 exports.DeleteCiudadano = (req, res, next) => {
-    const documentoIdentidad = req.params.documentoIdentidad;
+    const Ciudadanoid = req.body.id;
     Ciudadanos.destroy({
-            where: {
-                documentoIdentidad: documentoIdentidad
-            }
-        })
+        where: {
+            id: Ciudadanoid
+        }
+    })
         .then((result) => {
             res.redirect("/ciudadanos");
         })

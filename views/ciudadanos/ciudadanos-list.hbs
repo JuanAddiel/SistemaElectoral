@@ -25,15 +25,16 @@
         <h5 class="card-title">Nombre: {{Ciudadano.nombre}}</h5>
         <h5 class="card-title">Apellido: {{Ciudadano.apellido}}</h5>
         <h5 class="card-title">Email: {{Ciudadano.email}}</h5>
-        <h5 class="card-title">Estado: {{#if Ciudadano.estado}}activo{{else}}inactivo{{/if}}</h5>
+        <h5 class="card-title">Estado: {{#if (equalValue Ciudadano.estado true)}}activo{{else}}inactivo{{/if}}</h5>
 
         
         
         <br>
 
-        <form class="form-inline" id="form-delete" action="/ciudadanos-delete/{{Ciudadano.documentoIdentidad}}" method="post">
+        <form class="form-inline" id="form-delete" action="/ciudadanos-delete" method="post">
+        <input type="hidden" name="id" value="{{Ciudadano.id}}" />
           <button type="submit" class=" btn btn-danger mx-2 ciudadanos-delete" >Eliminar</button>
-          <a class=" btn btn-success" href="/ciudadanos-update/{{Ciudadano.documentoIdentidad}}?edit=true">Editar</a>       
+          <a class=" btn btn-success" href="/ciudadanos-update/{{Ciudadano.id}}?edit=true">Editar</a>       
         </form>
 
     </div>

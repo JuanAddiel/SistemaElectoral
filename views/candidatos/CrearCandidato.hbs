@@ -6,32 +6,68 @@
     </div>
     <div class="Puestos-info">
         <h4>{{#if editMode}}Edite el candidato{{else}}Cree aquí un nuevo candidato{{/if}} 📋</h4>
-        <p>{{#if editMode}}No hay error que no se pueda corregir <i class="fa-solid fa-clover"></i>{{else}}Suerte, nuevo candidato! <i class="fa-solid fa-clover"></i>{{/if}}</p>
+        <p>{{#if editMode}}No hay error que no se pueda corregir <i class="fa-solid fa-clover"></i>{{else}}Suerte, nuevo
+            candidato! <i class="fa-solid fa-clover"></i>{{/if}}</p>
     </div>
     <div class="form-container">
-        <form action="{{#if editMode}}/edit-candidato{{else}}/create-candidato{{/if}}" method="post">
+        {{#if hasPartidos}}
+        {{#if hasPuestos}}
+        <form enctype="multipart/form-data" action="{{#if editMode}}/edit-candidato{{else}}/create-candidato{{/if}}"
+            method="post">
+            
             <div class="form-section">
                 <label for="nombre" class="puesto-label"><i class="fa-solid fa-diamond"></i></i></label>
-                <input type="text" placeholder="Nombre del candidato" id="nombre" class="puesto-input" name="Cnombre" value="{{#if editMode}}{{candidatos.nombre}}{{/if}}">
+                <input type="text" placeholder="Nombre del candidato" id="nombre" class="puesto-input" name="Cnombre"
+                    value="{{#if editMode}}{{candidatos.nombre}}{{/if}}">
             </div>
             <div class="form-section">
                 <label for="apellido" class="puesto-label"><i class="fa-solid fa-file-signature"></i></label>
-                <input type="text" placeholder="Apellido, Ej: Fernandez" id="apellido" class="puesto-input" name="Capellido" value="{{#if editMode}}{{candidatos.apellido}}{{/if}}">
+                <input type="text" placeholder="Apellido, Ej: Fernandez" id="apellido" class="puesto-input"
+                    name="Capellido" value="{{#if editMode}}{{candidatos.apellido}}{{/if}}">
+            </div>
+
+            <div class="form-section">
+                <select class="form-select" id="partido" name="Partidos" required>
+                    <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+
+                    {{#each partidos as |pa|}}
+
+                    {{#if (equalValue pa.id ../candidatos.partidoId)}}
+                    <option selected value="{{pa.id}}">{{pa.nombre}}</option>
+                    {{else}}
+                    <option value="{{pa.id}}">{{pa.nombre}}</option>
+                    {{/if}}
+
+                    {{/each}}
+
+                </select>
             </div>
             <div class="form-section">
-                <label for="puesto" class="puesto-label"><i class="fa-solid fa-star"></i></i></label>
-                <!--Este no funciona porque no pude optener el valor de esta columna -->
-                <input type="text" placeholder="Puesto, Ej: Presidente" id="puesto" class="puesto-input" name="Cpuesto" value="">
+                <select class="form-select" id="puesto" name="Puestos" required>
+                    <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+
+                    {{#each puestos as |pu|}}
+
+                    {{#if (equalValue pu.id ../candidatos.puestoElectivoId)}}
+                    <option selected value="{{pu.id}}">{{pu.nombre}}</option>
+                    {{else}}
+                    <option value="{{pu.id}}">{{pu.nombre}}</option>
+                    {{/if}}
+
+                    {{/each}}
+
+                </select>
             </div>
             <div class="form-section">
-                <label for="partido" class="puesto-label"><i class="fa-solid fa-handshake"></i></label>
-                <!--Este no funciona porque no pude optener el valor de esta columna -->
-                <input type="text" placeholder="Partido, Ej: PLD" id="partido" class="puesto-input" name="Cpartido" value="">
+                <label for="image" class="puesto-label"><i class="fa-solid fa-link"></i></i></label>
+                <input type="file" placeholder="Inserte la URL del logo del partido" id="image" class="puesto-input"
+                    name="Imagen" value="{{#if editMode}}{{partidos.logo}}{{/if}}">
             </div>
-            <div class="form-section">
-                <label for="foto" class="puesto-label"><i class="fa-solid fa-image"></i></label>
-                <input type="text" placeholder="Foto del mismo" id="foto" class="puesto-input" name="Cfoto" value="{{#if editMode}}{{candidatos.foto}}{{/if}}">
-            </div>
+       <div class="mb-3">
+          <label for="estado">Estado:</label><br>
+          <input type="radio" name="estado" value="activo" {{#if (equalValue candidatos.estado true)}} checked{{/if}} >Activo<br>
+          <input type="radio" name="estado" value="inactivo" {{#if (equalValue candidatos.estado false)}} checked{{/if}} >Inactivo<br>
+        </div>   
             {{#if editMode}}
             <input type="hidden" name="puestoId" value="{{candidatos.id}}">
             {{/if}}
@@ -40,5 +76,19 @@
                 <button type="submit" class="send-puesto">{{#if editMode}}Editar{{else}}Crear{{/if}} puesto</button>
             </div>
         </form>
-    </div> 
+        {{else}}
+        <div class="no-puestos">
+            <h4>No hay puestos disponibles</h4>
+            <p>Para crear un candidato primero debe crear un puesto</p>
+            <a href="/puestoElectivo" class="GoBack">Ir a puestos</a>
+        </div>
+        {{/if}}
+        {{else}}
+        <div class="no-partidos">
+            <h4>No hay partidos disponibles</h4>
+            <p>Para crear un candidato primero debe crear un partido</p>
+            <a href="/partidos" class="GoBack">Ir a partidos</a>
+        </div>
+        {{/if}}
+    </div>
 </div>

@@ -1,0 +1,43 @@
+<div class="puestos-container">
+    <div class="circle-container">
+        <div class="green-circle circle"></div>
+        <div class="yellow-circle circle"></div>
+        <div class="red-circle circle"></div>
+    </div>
+    
+    <div class="Puestos-info">
+    <h4>Bienvenido a los puestos!</h4>
+    <p>Aqui veras todos los puestos disponibles para votar:</p>
+    </div>
+    <div class="dividor"></div>
+     
+    <div class="puestos-list">
+      
+        {{#each puestoElectivo as |puesto|}}
+
+         <a href="/votos/{{puesto.id}}?eleccionId={{../eleccion.dataValues.id}}">
+        <!--/{{puesto.id}} para obtener el id con el que estaba trabajando en el controlador exports.Candidatos-->
+     
+            <div class="puestos">
+                <div class="left-color"></div>
+                <div class="right-color"></div>
+                <div>
+                    <p>{{puesto.nombre}}</p>
+                    <p class="descripcion">{{userId}}</p>
+                </div>
+                <div class="maintenance">
+                    <form action="" method="post">
+                        <input type="hidden" name="puestoId" value="{{puesto.id}}">
+                        <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
+                
+            </div>
+        
+        {{/each}}
+    </div>
+           
+    
+    </a> 
+    </div>
+</div>

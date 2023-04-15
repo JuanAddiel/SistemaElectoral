@@ -2,119 +2,121 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{pageTitle}}</title>
-        <link rel="stylesheet" href="/assets/css/Style.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css" />
-        <script src="https://kit.fontawesome.com/a93c9858db.js" crossorigin="anonymous"></script>
-     {{#if loginCSS}}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{pageTitle}}</title>
+  <link rel="stylesheet" href="/assets/css/Style.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css" />
+  <script src="https://kit.fontawesome.com/a93c9858db.js" crossorigin="anonymous"></script>
+  
+  {{#if loginCSS}}
 
-      <link rel="stylesheet" href="assets/css/loginStyle.css">
+  <link rel="stylesheet" href="/assets/css/loginStyle.css">
 
-     {{/if}}
+  {{/if}}
+
 </head>
 
 <body>
 
 
-    {{#if loginActive}}
-    {{else}}
-    <nav class="navbar navbar-expand-md navbar-dark mb-4 bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+  {{#if loginActive}}
+  {{else}}
+  <nav class="navbar navbar-expand-md navbar-dark mb-4 bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/votar">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/candidatos">Candidatos</a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/puestos">Puestos</a>
-                    </li>
-                </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/candidatos">Candidatos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/partidos">Partidos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/puestoElectivo">Puesto Electivo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ciudadanos">Ciudadanos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/elecciones">Elecciones</a>
+          </li>
+        </ul>
 
 
-                     <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-           
-            <li class="nav-item">
-              <a class="nav-link" href="/ciudadanos">Ciudadanos</a>
-            </li>        
-            <li class="nav-item">
-              <a class="nav-link" href="/puestoElectivo">Puesto Electivo</a>
-            </li>          
-          </ul>          
-        <div>
-                <div>
-                    <form class="d-flex">                        
-                        <button class="btn btn-outline-success" type="submit">Iniciar sesión</button>                         
-                    </form>
-                </div>
-                 <div class="d-flex">
-        
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      
 
-             {{#if isAuthenticated}}
+            <div class="d-flex">
 
-              <li class="nav-item">
-               <form action="/logout" method="POST">                 
-                  <button class="btn btn-danger" type="submit">Logout</button>
-                </form>
-              </li>
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
-            {{else}}
-               <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="/login">Login</a>
+                {{#if isAuthenticated}}
+
+                <li class="nav-item">
+                  <form action="/logout" method="POST">
+
+                    <button class="btn btn-danger" type="submit">Logout</button>
+                  </form>
                 </li>
 
-               <li class="nav-item">
-                  <a class="nav-link {{#if signupActive}}active{{/if}}" aria-current="page" href="/signup">Signup</a>
+                {{else}}
+                <li class="nav-item">
+                  <a class="nav-link bg-success btn m-2" aria-current="page" href="/login">Login</a>
                 </li>
 
-           {{/if}}
-            
-        
-          </ul>
+                <li class="nav-item">
+                  <a class="nav-link bg-primary btn m-2 {{#if signupActive}}active{{/if}}" aria-current="page"
+                    href="/signup">Signup</a>
+                </li>
+
+                {{/if}}
+
+
+              </ul>
 
 
             </div>
-        </div>
-    </nav>
+          </div>
+  </nav>
 
-{{/if}}
-    <main class="container">
+  {{/if}}
+  <main class="container">
 
-         {{#if hasErrorMessages}} 
+    {{#if hasErrorMessages}}
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <ul>
-          {{#each errorMessages}}
-            <li>{{this}}</li>
-          {{/each}}
-        </ul>  
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>   
-    
+      <ul>
+        {{#each errorMessages}}
+        <li>{{this}}</li>
+        {{/each}}
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     {{/if}}
 
-   
-
-    </main>
-       {{{body}}}
-
-    <script src="/assets/js/bootstrap/bootstrap.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <script src="/assets/index/index.js"></script>
+  </main>
+  <div class="container">
+      {{{body}}}
+  </div>
+
+
+  <script src="/assets/js/bootstrap/bootstrap.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="/assets/index/index.js"></script>
 </body>
 
 </html>

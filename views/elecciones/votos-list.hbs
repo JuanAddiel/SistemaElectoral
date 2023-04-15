@@ -1,0 +1,48 @@
+<div class="puestos-container">
+    <div class="right-lines">
+        <div class="top-line line"></div>
+        <div class="middle-line line"></div>
+        <div class="bottom-line line"></div>
+    </div>
+    <div class="Puestos-info">
+        <h4>Bienvenido a los candidatos!</h4>
+        <p>Aqui veras y votaras por los candidatos para el puesto que elejiste:</p>
+    </div>
+    <div class="multiple-dividor">
+        <div class="left-dividor"></div>
+        <div class="right-dividor"></div>
+    </div>
+
+    <div class="puestos-list">
+        <!-- aqui comienza el elemento del candidato -->
+        {{#each candidato as |ca|}}
+        <div class="candidato">
+            <div class="cont-candi">
+                <div class="img-container">
+                    <img src="{{ca.foto}}" alt="candidato img" class="candi-img">
+                </div>
+                <div class="candi-info">
+                    <h5 class="title-candi">{{ca.nombre}} {{ca.apellido}}</h5>
+
+                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar bg-success" style="width:{{#if (equalValue ../voto.candidatoId ca.id)}}{{../voto.votos}}{{/if}}%">{{#if (equalValue ../voto.candidatoId ca.id)}}{{../voto.votos}}{{/if}}%</div>
+</div>
+
+                </div>
+                <div class="candi-dividor"></div>
+                <p class="Cpartido">Partido: {{ca.partido.dataValues.nombre}}</p>
+            </div>
+            <div class="candi-maintenance">
+                <div class="candi-focus">
+                    <i class="fa-solid fa-thumbtack"></i>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    {{/each}}
+</div>
+
+</div>

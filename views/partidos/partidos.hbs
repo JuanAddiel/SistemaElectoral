@@ -28,6 +28,9 @@
             <div class="titainer">
                 <h5 class="parti-title">{{partido.nombre}}</h5>
             </div>
+             <div class="titainer">
+                <h5 class="parti-title">{{#if (equalValue partido.estado true)}}Activo{{else}}Inactivo{{/if}}</h5>
+            </div>
             <div class="information">
                 <p class="info">{{partido.descripcion}}</p>
             </div>
