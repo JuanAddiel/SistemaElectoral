@@ -1,13 +1,19 @@
+//Importamos todos los paquetes que utilizaremos
 const path = require('path');
 const express = require('express');
 const sequelize = require('./context/appContext');
 const { engine } = require('express-handlebars');
-const errorController = require('./controllers/ErrorController');
 const session = require('express-session');
 const flash = require('connect-flash');
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+
+//Helpers
 const compareHelpers = require('./utils/hbs/compare');
+
+//Controladores 
+const errorController = require('./controllers/ErrorController');
+const welcome = require('./controllers/welcomeController');
 
 
 //Modulos or Tables
@@ -44,6 +50,8 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, './public')));
 
+
+//Lo que utilizamos para poder subir imagenes.
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 
@@ -100,9 +108,11 @@ const candidatoRouter = require('./routes/candidatos');
 const partidoRouter = require('./routes/partidos');
 const Eleccion = require('./routes/eleccionesRoute');
 const VotarRouter = require('./routes/votarRoute');
-const welcome = require('./controllers/welcomeController');
 
 
+app.get('/', (req, res) => {
+  res.redirect('/welcome');
+});
 app.use("/welcome",welcome.getWelcome);
 app.use(autorRoute);
 app.use(candidatoRouter);
@@ -112,7 +122,7 @@ app.use(puestoElectivosRoute);
 app.use(Eleccion);
 app.use(VotarRouter);
 
-app.use("/", errorController.Get404);
+app.use(errorController.Get404);
 
 
 //Relaciones que tienen
@@ -168,4 +178,4 @@ sequelize.sync({
   app.listen(3000);
 }).catch(err => {
   console.log(err);
-})
+})  

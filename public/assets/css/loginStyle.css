@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html,
@@ -18,30 +19,32 @@ body {
   display: grid;
   place-items: center;
   margin: 0;
-  padding: 0 24px;
-  background-image: url("background.svg");
+  background: url(../css/magicpattern-blob-1681741166580.png);
+  background-position: left;
   background-repeat: no-repeat;
-  background-size: cover;
   font-family: "Euclid Circular A";
   color: #000;
-  animation: rotate 6s infinite alternate linear;
+  
 }
-
 @media (width >= 500px) {
   body {
     padding: 0;
   }
 }
-
+.container{
+  height: 80vh;
+}
 .login-card {
   position: relative;
-  z-index: 3;
   width: 100%;
-  margin: 0 20px;
   padding: 70px 30px 44px;
-  border-radius: 1.25rem;
+  border-radius: 12px;
   background: #fff;
   text-align: center;
+  border: 1px solid #E5E7E9;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  margin: 0;
+  overflow: hidden;
 }
 
 @media (width >= 500px) {
@@ -72,8 +75,49 @@ body {
 }
 
 .login-form > input,
-.login-form > button {
-  width: 100%;
-  height: 56px;
-}
 
+.GoBack{
+  background: #F7DC6F;
+  padding: 6px;
+  width: 27%;
+  margin: 0 4px;
+  border-radius: 3px;
+  letter-spacing: .2px;
+  text-decoration: none;
+  color: #000;
+}
+.sign-in-btn{
+  width: 27%;
+  border: none;
+  border-radius: 3px;
+  background: #45feaf;
+}
+.log-btns{
+  display: flex;
+  justify-content: center;
+}
+.log-css{
+  display: flex;
+  justify-content: center;
+}
+.password-rest{
+  color: #000;
+  transition: all .3s ease-in-out;
+}
+.form-signin{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+}
+.log-circle-container{
+  position: absolute;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  height: 6vh;
+  top: 0;
+  left: 25%;
+  top: 1%;
+  
+}

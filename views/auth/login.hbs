@@ -1,6 +1,10 @@
 <main class="form-signin">
   <div class="login-card">
-    <h2>Login</h2>
+    <div class="log-circle-container">
+      <div class="biggest"></div>
+        
+    </div>
+    <h2><i class="fa-solid fa-user"></i> Login</h2>
     <h3>Enter your credentials</h3>
     <form class="login-form" action="/login" method="POST">
     
@@ -12,9 +16,11 @@
         <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
-      <a href="/reset">¿Haz olvidado contraseña?</a>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <a href="/" class="w-100 btn btn-lg btn-warning">Atras</a>
+      <a href="/reset" class="password-rest">¿Did you forget your password?</a>
+      <div class="log-btns">
+        <a href="/welcome" class="GoBack"> <i class="fa-solid fa-left-long"></i>Atras</a>
+        <button class="sign-in-btn" type="submit">Sign in</button>
+      </div>
     </form>
   </div>
 </main>

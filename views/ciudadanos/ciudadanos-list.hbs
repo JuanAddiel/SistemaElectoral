@@ -1,46 +1,48 @@
-<main>
-         <section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Ciudadanos.</h1>
-      <p class="lead text-muted">Cree el Ciudadanos.</p>
-      <p>
-        <a href="/ciudadanos-save" class="btn p-2 mb-2 bg-primary text-white">Crear Ciudadanos</a>
-      </p>
+<div class="puestos-container">
+  <div class="circle-container">
+        <div class="green-circle circle"></div>
+        <div class="yellow-circle circle"></div>
+        <div class="red-circle circle"></div>
     </div>
-  </div>
-</section>
+  <section class=" text-center container">
+    <div class="row">
+        <h1 class="">Ciudadanos.</h1>
+        <p class="lead text-muted">Cree el Ciudadanos.</p>
+        <p>
+          <a href="/ciudadanos-save" class="btn p-2 mb-2 btn-success text-white">Crear Ciudadanos</a>
+        </p>
+    </div>
+  </section>
 
+  <div class="multiple-dividor">
+        <div class="left-dividor"></div>
+        <div class="right-dividor"></div>
+    </div>
 <div class="row">
 
 {{#if hasCiudadano}}
 
 {{#each ciudadano as |Ciudadano|}}
 
-<div class="col-md-4 mt-5">
-
-   <div class="card bg-dark text-light" style="width: 18rem;">   
-    <div class="card-body">
-        <h5 class="card-title">Documento Identidad: {{Ciudadano.documentoIdentidad}}</h5>
-        <h5 class="card-title">Nombre: {{Ciudadano.nombre}}</h5>
+<div class="col-md-3 mx-3">  
+    <div class="partido-container">
+        <h5 class="parti-title">Documento Identidad: {{Ciudadano.documentoIdentidad}}</h5>
+        <div class="p-d"></div>
+        <h5 class="parti-title">Nombre: {{Ciudadano.nombre}}</h5>
+        <div class="p-d"></div>
         <h5 class="card-title">Apellido: {{Ciudadano.apellido}}</h5>
-        <h5 class="card-title">Email: {{Ciudadano.email}}</h5>
-        <h5 class="card-title">Estado: {{#if (equalValue Ciudadano.estado true)}}activo{{else}}inactivo{{/if}}</h5>
+        <div class="p-d"></div>
+        <h5 class="parti-title">Email: {{Ciudadano.email}}</h5>
+        <div class="p-d"></div>
+        <h5 class="parti-title">Estado: {{#if (equalValue Ciudadano.estado true)}}activo{{else}}inactivo{{/if}}</h5>
 
-        
-        
-        <br>
-
-        <form class="form-inline" id="form-delete" action="/ciudadanos-delete" method="post">
+        <form class="parti-maintenance" id="form-deleteCIu" action="/ciudadanos-delete" method="post">
         <input type="hidden" name="id" value="{{Ciudadano.id}}" />
-          <button type="submit" class=" btn btn-danger mx-2 ciudadanos-delete" >Eliminar</button>
-          <a class=" btn btn-success" href="/ciudadanos-update/{{Ciudadano.id}}?edit=true">Editar</a>       
+          <button type="submit " class="delete-btn de-parti ciudadano" ><i class="fa-solid fa-trash de-parti"></i></button>
+          <a class="parti-edit" href="/ciudadanos-update/{{Ciudadano.id}}?edit=true"><i class="fa-solid fa-pen parti-edit"></i></a>       
         </form>
 
     </div>
-
-
-</div>
 
 </div>
 
@@ -55,4 +57,4 @@
 </div>
 </div>
 
-</main>
+</div>

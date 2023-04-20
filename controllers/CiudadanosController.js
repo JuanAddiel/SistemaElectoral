@@ -11,7 +11,8 @@ exports.GetCiudadanos = (req, res, next) => {
                 pageTitle: "Ciudadano",
                 ciudadanoActi: true,
                 ciudadano: ciudadano,
-                hasCiudadano: ciudadano.length > 0
+                hasCiudadano: ciudadano.length > 0,
+                isAdmin: true
             });
         })
         .catch((err) => {
@@ -22,6 +23,7 @@ exports.GetCiudadanos = (req, res, next) => {
 exports.GetSaveCiudadanos = (req, res, next) => {
     res.render("ciudadanos/ciudadanos-save", {
         pageTitle: "Administra ciudadanos",
+        isAdmin: true
     });
 };
 
@@ -71,7 +73,8 @@ exports.GetUpdateCiudadano = (req, res, next) => {
                 pageTitle: "Editar ciudadano",
                 Ciudadano: ciudadano,
                 editMode: edit,
-                ciudadanoActive: true,
+                ciudadanoActi: true,
+                isAdmin: true
             });
         })
         .catch((err) => {

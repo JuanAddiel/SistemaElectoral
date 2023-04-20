@@ -33,7 +33,7 @@
                     </div>
                     <div class="dele-edi">
                         <a href="/edit-candidato/{{ca.id}}?edit=true" class="candi-edit"><i class="fa-solid fa-pen"></i></a>
-                        <form action="/delete-candidato" method="post" class="candi-form">
+                        <form action="/delete-candidato" method="post" id="candi-form" class="candi-form ">
                             <input type="hidden" name="candidatoId" value="{{ca.id}}">
                             <button class="candi-delete"><i class="fa-solid fa-trash"></i></button>
                         </form>

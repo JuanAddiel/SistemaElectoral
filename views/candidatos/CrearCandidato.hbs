@@ -16,7 +16,7 @@
             method="post">
             
             <div class="form-section">
-                <label for="nombre" class="puesto-label"><i class="fa-solid fa-diamond"></i></i></label>
+                <label for="nombre" class="puesto-label"><i class="fa-solid fa-diamond"></i></label>
                 <input type="text" placeholder="Nombre del candidato" id="nombre" class="puesto-input" name="Cnombre"
                     value="{{#if editMode}}{{candidatos.nombre}}{{/if}}">
             </div>
@@ -26,9 +26,11 @@
                     name="Capellido" value="{{#if editMode}}{{candidatos.apellido}}{{/if}}">
             </div>
 
-            <div class="form-section">
-                <select class="form-select" id="partido" name="Partidos" required>
-                    <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+            <div class="select-flex">
+                <div class="form-section">
+                <label for="partido" class="puesto-label"><i class="fa-solid fa-handshake"></i></label>
+                <select class="candi-select" id="partido" name="Partidos" required>
+                    <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione un partido</option>
 
                     {{#each partidos as |pa|}}
 
@@ -43,8 +45,9 @@
                 </select>
             </div>
             <div class="form-section">
-                <select class="form-select" id="puesto" name="Puestos" required>
-                    <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+                <label for="puesto" class="puesto-label"><i class="fa-solid fa-check-to-slot"></i></label>
+                <select class="candi-select" id="puesto" name="Puestos" required>
+                    <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione un puesto</option>
 
                     {{#each puestos as |pu|}}
 
@@ -58,13 +61,14 @@
 
                 </select>
             </div>
+            </div>
             <div class="form-section">
                 <label for="image" class="puesto-label"><i class="fa-solid fa-link"></i></i></label>
-                <input type="file" placeholder="Inserte la URL del logo del partido" id="image" class="puesto-input"
+                <input type="file" placeholder="Inserte la URL del logo del partido" id="image" class="puesto-input "
                     name="Imagen" value="{{#if editMode}}{{partidos.logo}}{{/if}}">
             </div>
-       <div class="mb-3">
-          <label for="estado">Estado:</label><br>
+       <div class="form-section">
+          <label for="estado" class="puesto-label">Estado:</label><br>
           <input type="radio" name="estado" value="activo" {{#if (equalValue candidatos.estado true)}} checked{{/if}} >Activo<br>
           <input type="radio" name="estado" value="inactivo" {{#if (equalValue candidatos.estado false)}} checked{{/if}} >Inactivo<br>
         </div>   
@@ -77,7 +81,7 @@
             </div>
         </form>
         {{else}}
-        <div class="no-puestos">
+        <div class="no-puestos">    
             <h4>No hay puestos disponibles</h4>
             <p>Para crear un candidato primero debe crear un puesto</p>
             <a href="/puestoElectivo" class="GoBack">Ir a puestos</a>

@@ -5,7 +5,7 @@ exports.PartidosMain = (req, res, next) => {
     partidos.findAll().then(result => {
         const Partido = result.map(result => result.dataValues);
         
-        res.render("partidos/partidos", {pageTitle: "Partidos", partidos: Partido});
+        res.render("partidos/partidos", {pageTitle: "Partidos", partidos: Partido, homePartido:true, isAdmin: true});
     }).catch(err => {
         console.log("Something went wrong");
     })
@@ -37,25 +37,34 @@ exports.EditPartidos = (req, res, next) => {
 
     partidos.findOne({where: {id: Sid}}).then(result => {
         const partido = result.dataValues;
-        res.render("partidos/CrearPartidos", {pageTitle: "Editar Partido", editMode: edit, partidos: partido})
+        res.render("partidos/CrearPartidos", {pageTitle: "Editar Partido", editMode: edit, partidos: partido, homePartido:true, isAdmin: true})
     }).catch(err => {
         console.log("There was an error obtaining the values");
     })
 }
 exports.PostEditPartido = (req, res, next) => {
     const id = req.body.puestoId;
-
     const name = req.body.nombre;
     const description = req.body.descripcion;
-    const logo = req.body.logo;
+    const logo = req.file;
     const estado = (req.body.estado === 'activo');
 
+    partidos.findOne({where:{id:id}})
+    .then((result) => {
+        const partido = result.dataValues;
+        if (!partido) {
+            return res.redirect("/partidos");
+        }
 
-    partidos.update({nombre: name, descripcion: description, logo:logo, estado: estado}, {where: {id: id}}).then(result => {
-        res.redirect("/partidos");
-    }).catch(err => {
-        console.log("ERRROR!" + " " + err);
+        const imagePath = logo ? "/" + logo.path : partido.imagen;
+        partidos.update({nombre: name, descripcion: description, logo:imagePath, estado: estado}, {where: {id: id}}).then(result => {
+            res.redirect("/partidos");
+        }).catch(err => {
+            console.log("ERRROR!" + " " + err);
+        })
     })
+
+   
 }
 exports.DeletePartido = (req, res, next) => {
     const DiD = req.body.partidoId;

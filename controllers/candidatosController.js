@@ -16,7 +16,8 @@ exports.Candidatos = (req, res, next) => {
             pageTitle: "Candidatos",
             candidatos: candidato,
             hasCandidatos: candidato.length > 0,
-            homeCandidato: true
+            homeCandidato: true,
+            isAdmin: true
         });
     }).catch(err => {
         console.log("Something went wrong");
@@ -36,7 +37,8 @@ exports.CreateCandidatos = (req, res, next) => {
                 editMode: false,
                 homeCandidato: true,
                 hasPartidos: partido.length > 0,
-                hasPuestos: puesto.length > 0
+                hasPuestos: puesto.length > 0,
+                isAdmin: true
             });
         }).catch(err => {
             console.log(err);
@@ -80,8 +82,8 @@ exports.EditCandidato = (req, res, next) => {
             const partido = result.map(result => result.dataValues);
             PuestoElectivo.findAll({where: {estado:1}}).then(result => {
                 const puesto = result.map(result => result.dataValues);
-            res.render("candidatos/CrearCandidato", { pageTitle: "Editar Candidato", editMode: edit, candidatos: candidato, partidos: partido, puestos: puesto, hasPartidos: partido.length > 0,
-            hasPuestos: puesto.length > 0})
+            res.render("candidatos/CrearCandidato", { homeCandidato:true,pageTitle: "Editar Candidato", editMode: edit, candidatos: candidato, partidos: partido, puestos: puesto, hasPartidos: partido.length > 0,
+            hasPuestos: puesto.length > 0, isAdmin: true})
         }).catch(err => {
             console.log(err)
         })
@@ -96,48 +98,45 @@ exports.PostEditCandidato = (req, res, next) => {
     const lastname = req.body.Capellido;
     const position = req.body.Cpuesto;
     const party = req.body.Partidos;
-    const pic = req.body.Cfoto;
-    const elementID = req.body.puestoId;
+    const foto = req.file;
+    const elementID = req.body.id;
     const estado = req.body.estado === "activo";
-    console.log(estado)
+    candidatos.findOne({ where: { id: elementID } })
+    .then((result) => {
+        const candidato = result.dataValues;
+        if (!candidato) {
+            return res.redirect("/candidatos");
+        }
+        const imagePath = foto ? "/" + foto.path : candidato.imagen; // operador ternario    })
+        candidatos.update({ nombre: name, apellido: lastname, puesto: position, partidoId: party, foto:imagePath, estado: estado }, {
+            where: {
+                id: elementID
+            }
+        })
 
-    candidatos.update({ nombre: name, apellido: lastname, puesto: position, partidoId: party, foto: pic, estado: estado }, { where: { id: elementID } }).then(result => {
-        return res.redirect("/candidatos");
-    }).catch(err => {
-        console.log(err)
+            .then((result) => {
+                res.redirect("/candidatos");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     })
+
 }
 
 
 exports.DeleteCandidato = (req, res, next) => {
     const id = req.body.candidatoId;
-    const name = req.body.Cnombre;
-    const lastname = req.body.Capellido;
-    const position = req.body.Cpuesto;
-    const party = req.body.Cpartido;
-    const pic = req.body.Cfoto;
-
-    candidatos.findOne({ where: { id: id } }).then(result => {
-        const puesto = result.dataValues;
-        let estado = puesto.estado;
-
-
-        candidatos.update({ nombre: name, apellido: lastname, puesto: position, partido: party, foto: pic, estado: false }, { where: { id: id } })
-            .then(result => {
-                if (!estado) {
-                    candidatos.destroy({ where: { id: id } }).then(result => {
-                        return res.redirect("/candidatos");
-                    }).catch(err => {
-                        console.log("Something went wrong");
-                    })
-                }
-                return res.redirect("/candidatos");
-            })
-            .catch(err => {
-                console.log("There was an error");
-            })
-    }).catch(err => {
-        console.log("ERROR! " + err);
+    candidatos.destroy({
+        where: {
+            id: id
+        }
     })
+        .then((result) => {
+            res.redirect("/candidatos");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 

@@ -6,33 +6,35 @@ const Partidos = require('../models/partidos');
 const Votos = require('../models/votos');
 const candidatoElecciones = require('../models/candidatosElecciones');
 
-
-exports.getVotos = (req,res,next)=>{
-    const eleccionId = req.query.eleccionId;
-    const puestoId = req.params.id;
-
-    console.log(puestoId)
-    candidatoElecciones.findOne({where:[{eleccioneId:eleccionId, puestoElectivoId:puestoId}]
-    })
-    .then((result)=>{
-        const elec =result.dataValues;
-        console.log(elec.votos)
-        candidatos.findAll({where:{id:elec.candidatoId}})
-        .then((result)=>{
-            const candid =result.map(result => result.dataValues);
-            res.render('elecciones/votos-list',{
-                pageTitle:'Votos',
-                candidato:candid,
-                voto: elec
-            })
-        }).catch(err => {
-            console.log(err);
-        })
-
-    }).catch(err => {
-        console.log(err);
-    })
-}
+exports.getVotos = async (req, res, next) => {
+    try {
+      const eleccionId = req.query.eleccionId;
+      const puestoId = req.params.id;
+  
+      console.log(puestoId);
+      const result = await candidatoElecciones.findOne({
+        where: [{ eleccioneId: eleccionId, puestoElectivoId: puestoId }],
+      });
+      const elec = result.dataValues;
+      console.log(elec.votos);
+      const candidatosResult = await candidatos.findAll({
+        where: { id: elec.candidatoId },
+        include: [{ model: Partidos }, { model: puestoElectivo }],
+      });
+      const candid = candidatosResult.map((result) => result.dataValues);
+      console.log(candid);
+      res.render("elecciones/votos-list", {
+        pageTitle: "Votos",
+        candidato: candid,
+        voto: elec,
+        homeEleccion: true,
+        isAdmin: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
 exports.getResultadoOfPuesto = async (req, res, next)=>{
     const eleccionId = req.query.id;
@@ -45,6 +47,7 @@ exports.getResultadoOfPuesto = async (req, res, next)=>{
             eleccioneId: eleccionActiva.id 
         },
     });
+
     const votosPuestosIds = votos.map(voto => voto.puestoElectivoId);
 
     const puesto = await puestoElectivo.findAll(
@@ -52,11 +55,16 @@ exports.getResultadoOfPuesto = async (req, res, next)=>{
     })
         .then((resul) => {
             const puestosElectivos = resul.map(result => result.dataValues);
-
+            if(resul.length === 0){
+                req.flash('errors', "Aun no tenemos resultados");
+                return res.redirect("/elecciones")
+            }
             res.render("elecciones/puesto-list", {
                 pageTitle: "Elecciones",
                 puestoElectivo: puestosElectivos,
-                eleccion: eleccionActiva
+                eleccion: eleccionActiva,
+                homeEleccion: true,
+                isAdmin: true
             });
         })
         .catch((error) => {
@@ -83,6 +91,8 @@ exports.getElecciones = (req, res, next) => {
                                         activeEleccion,
                                         candidato: candidato,
                                         puestosElectivos: puestoElectivo,
+                                        homeEleccion: true,
+                                        isAdmin: true
                                     });
                                 })
                                 .catch((error) => {
@@ -111,7 +121,9 @@ exports.getElecciones = (req, res, next) => {
 exports.getStartEleccion = (req, res, next) => {
     res.render("elecciones/elecciones-save", {
         pageTitle: "Elecciones",
-        editMode: false
+        editMode: false,
+        isAdmin: true,
+        homeEleccion: true,
     });
 };
 

@@ -39,7 +39,7 @@ exports.getPuestoElectivosActive = async (req, res, next) => {
         attributes: ['puestoElectivoId'] 
     });
     const votosPuestosIds = votos.map(voto => voto.puestoElectivoId);
-
+    console.log(votosPuestosIds)
     // Obtener los puestos electivos activos que aún no han sido votados por el usuario
     PuestoElectivo.findAll({
         where: {
@@ -57,6 +57,13 @@ exports.getPuestoElectivosActive = async (req, res, next) => {
     })
         .then((puestosElectivos) => {
             const puestosElectivo = puestosElectivos.filter((puesto) => puesto.candidatos.length > 1).map((result) => result.dataValues);
+            if(puestosElectivo.length < 1)
+            {
+                req.flash("errors", "Aun no hay candidatos activos, en los puestos");
+                                res.redirect("/votar");
+            }
+
+            
             res.render("votar/votar-puestos", {
                 pageTitle: "Votar",
                 puestoElectivo: puestosElectivo,
@@ -150,7 +157,7 @@ exports.postVotar = async (req, res, next) => {
         }
 
         // Redirige al usuario a la página de votación
-        res.redirect('/votar/votar-puestos');
+        res.redirect('/votar');
     } catch (error) {
         console.error(error);
         next(error);

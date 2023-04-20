@@ -1,56 +1,46 @@
-<div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header bg-primary text-light">
-        Crear usuario
-      </div>
-      <div class="card-body">
-        <form action="/signup" method="POST">
-        
-          <div class="mb-3">
-            <label for="name-input" class="form-label">
-              Nombre
-            </label>
-            <input type="text" class="form-control" id="name-input" name="name" />
-          </div>
 
-          <div class="mb-3">
-            <label for="cedula-input" class="form-label">
-              Cedula
-            </label>
-            <input type="text" class="form-control" id="cedula-input" name="cedula" />
+      <div class="puestos-container">
+        <div class="top-circle">
+          <div class="sign-circle"></div>
+        </div>
+        <div class="partidos-info ss-i">
+        <h4>Registrate <i class="fa-solid fa-right-to-bracket"></i></h4>
+        <p>Solo llena estos campos para crear tu usuario.</p>
+        </div>
+        <form action="/signup" method="POST" class="sign-form">
+        
+          <div class="sign-names">
+          <div class="i-f">
+            <label for="name-input" class="form-label"><i class="fa-solid fa-user"></i></label>
+            <input type="text" class="sign-input" placeholder="Nombre" id="name-input" name="name" />
           </div>
-          <div class="mb-3">
-            <label for="usuario-input" class="form-label">
-              Nombre Usuario
-            </label>
-            <input type="text" class="form-control" id="usuario-input" name="nombreUser" />
+          <div class="i-f">
+            <label for="usuario-input" class=""><i class="fa-regular fa-user"></i></label>
+            <input type="text" class="sign-input" placeholder="Nombre de usuario" id="usuario-input" name="nombreUser" />
           </div>
-          <div class="mb-3">
-            <label for="email-input" class="form-label">
-              Email address
-            </label>
-            <input type="email" class="form-control" id="email-input" name="email" />
           </div>
-          <div class="mb-3">
-            <label for="password-input" class="form-label">
-              Password
-            </label>
-            <input type="password" class="form-control" id="password-input" name="password" />
+          <div class="sign-names">
+          <div class="i-f">
+            <label for="cedula-input" class=""><i class="fa-solid fa-id-card"></i></label>
+            <input type="text" class="sign-input" placeholder="Cedula" id="cedula-input" name="cedula" />
           </div>
-          <div class="mb-3">
-            <label for="confirm-password-input" class="form-label">
-              Confirm Password
-            </label>
-            <input type="password" class="form-control" id="confirm-password-input" name="confirmPassword" />
+          <div class="i-f">
+            <label for="email-input" class=""><i class="fa-solid fa-envelope"></i></label>
+            <input type="email" class="sign-input" placeholder="Correo Electronico" id="email-input" name="email" />
           </div>
-          <button type="submit" class="btn btn-primary">
-            Create
-          </button>
+          </div>
+          <div class="sign-names">
+          <div class="i-f">
+            <label for="password-input" class=""><i class="fa-solid fa-lock"></i></label>
+            <input type="password" class="sign-input" placeholder="Contraseña" id="password-input" name="password" />
+          </div>
+          <div class="i-f">
+            <label for="confirm-password-input" class=""><i class="fa-solid fa-key"></i></label>
+            <input type="password" class="sign-input" placeholder="Confirmar contraseña" id="confirm-password-input" name="confirmPassword" />
+          </div>
+          </div>
+          <div class="creating">
+            <button type="submit" class="sign-btn">Create</button>
+          </div>
         </form>
       </div>
-    </div>
-  </div>
-  <div class="col-md-3"></div>
-</div>

@@ -6,10 +6,23 @@
     </div>
     
     <div class="Puestos-info">
-    <h4>Bienvenido a los puestos!</h4>
-    <p>Aqui veras todos los puestos disponibles para votar:</p>
+    <h4>Bienvenido a las elecciones!</h4>
+    <p>Aqui veras todos las elecciones disponibles para votar:</p>
     </div>
     <div class="dividor"></div>
+    {{#if HasEleccion}}
+
+    <div class="puestos-list">
+        <div class="puestos">
+            <div class="left-color"></div>
+            <div class="right-color"></div>
+            <div>
+                <p>No hay elecciones activas</p>
+                <p class="descripcion">No hay elecciones activas</p>
+            </div>
+            
+        </div>
+        {{/if}}
 
     {{#if HasVotado}}
 

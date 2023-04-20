@@ -1,23 +1,26 @@
-<main>
-  <div class="card">
-    <div class="card-header p-3 mb-2 bg-success text-white">
-      <h2 class=" text-center  ">Agregar Puesto Electivo</h2>
+<div class="puestos-container">
+    <div class="circle-container">
+        <div class="green-circle circle"></div>
+        <div class="yellow-circle circle"></div>
+        <div class="red-circle circle"></div>
+    </div> 
+    <div class="ap-c">
+      <h2 class="add-puesto">Agregar Puesto Electivo <i class="fa-solid fa-handshake"></i></h2>
     </div>
-
-    <div class="card-body">
+    <div class="form-container">
 
       <form method="POST" action="{{#if editMode}}/puestoElectivo-update/{{PuestoElectivo.id}}{{else}}/puestoElectivo-save{{/if}}">
-        <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" value="{{#if editMode}}{{PuestoElectivo.nombre}}{{/if}}" />
+        <div class="form-section">
+          <label for="nombre" class="puesto-label"><i class="fa-regular fa-file"></i></label>
+          <input type="text" class="puesto-input" placeholder="Nombre del puesto, Ej: Presidente" id="nombre" name="nombre" value="{{#if editMode}}{{PuestoElectivo.nombre}}{{/if}}" />
         </div>
 
-        <div class="mb-3">
-          <label for="descripcion" class="form-label">Descripcion:</label>
-          <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{#if editMode}}{{PuestoElectivo.descripcion}}{{/if}}" />
+        <div class="form-section">
+          <label for="descripcion" class="puesto-label"><i class="fa-regular fa-pen-to-square"></i></label>
+          <input type="text" class="puesto-input" placeholder="Descripción del puesto, Ej: Persona encargada del pais" id="descripcion" name="descripcion" value="{{#if editMode}}{{PuestoElectivo.descripcion}}{{/if}}" />
         </div>
 
-         <div class="mb-3">
+         <div class="form-section ps-s">
           <label for="estado">Estado:</label><br>
           <input type="radio" name="estado" value="activo" {{#if (equalValue PuestoElectivo.estado true)}} checked{{/if}} >Activo<br>
           <input type="radio" name="estado" value="inactivo" {{#if (equalValue PuestoElectivo.estado false)}} checked{{/if}} >Inactivo<br>
@@ -27,9 +30,9 @@
         {{#if editMode}}
           <input type="hidden" value="{{PuestoElectivo.id}}" name="id">
         {{/if}}
-
-        <button id="enviar" type="submit" class="btn btn-primary">{{#if editMode}}Update{{else}}Add{{/if}}</button>
+        <div class="puestos-buttons">
+          <button id="enviar" type="submit" class="send-puesto">{{#if editMode}}Actualizar{{else}}Agregar{{/if}}</button>
+        </div>
       </form>
     </div>
   </div>
-</main>

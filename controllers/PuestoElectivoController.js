@@ -13,7 +13,8 @@ exports.GetPuestoElectivo = (req, res, next) => {
                 pageTitle: "Puesto Electivo",
                 puestoElectivoActi: true,
                 puestoElectivo: puestoElectivo,
-                hasPuestoElectivo: puestoElectivo.length > 0
+                hasPuestoElectivo: puestoElectivo.length > 0,
+                isAdmin: true
             });
         })
         .catch((err) => {
@@ -70,6 +71,8 @@ exports.GetUpdatePuestoElectivo = (req, res, next) => {
                 pageTitle: "Editar Puesto Electivo",
                 PuestoElectivo: puestoElectivo,
                 editMode: edit,
+                puestoElectivoActi: true,
+                isAdmin: true
             });
         })
         .catch((err) => {

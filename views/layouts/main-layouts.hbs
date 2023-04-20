@@ -25,29 +25,31 @@
   {{else}}
   <nav class="navbar navbar-expand-md navbar-dark mb-4 bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/votar">Home</a>
+      {{#if isAdmin}}{{else}}<a class="navbar-brand" href="/votar">Home</a>{{/if}}
+      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-
+          {{#if isAdmin}}
           <li class="nav-item">
-            <a class="nav-link" href="/candidatos">Candidatos</a>
+            <a class="nav-link {{#if homeCandidato}}active{{/if}}" href="/candidatos" >Candidatos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/partidos">Partidos</a>
+            <a class="nav-link {{#if homePartido}}active{{/if}}" href="/partidos">Partidos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/puestoElectivo">Puesto Electivo</a>
+            <a class="nav-link {{#if puestoElectivoActi}}active{{/if}}" href="/puestoElectivo">Puesto Electivo</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/ciudadanos">Ciudadanos</a>
+            <a class="nav-link {{#if ciudadanoActi}}active{{/if}}" href="/ciudadanos">Ciudadanos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/elecciones">Elecciones</a>
+            <a class="nav-link {{#if homeEleccion}}active{{/if}}" href="/elecciones">Elecciones</a>
           </li>
+          {{/if}}
         </ul>
 
 
@@ -68,7 +70,7 @@
 
                 {{else}}
                 <li class="nav-item">
-                  <a class="nav-link bg-success btn m-2" aria-current="page" href="/login">Login</a>
+                  <a class="nav-link bg-success btn m-2" aria-current="page" href="/login"><i class="fa-solid fa-user"></i> Login</a>
                 </li>
 
                 <li class="nav-item">
@@ -87,7 +89,7 @@
   </nav>
 
   {{/if}}
-  <main class="container">
+  <main class="error-container">
 
     {{#if hasErrorMessages}}
 
@@ -105,7 +107,7 @@
 
 
   </main>
-  <div class="container">
+  <div class="container log-css">
       {{{body}}}
   </div>
 

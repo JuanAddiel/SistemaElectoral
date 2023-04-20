@@ -12,6 +12,7 @@ exports.GetLogin = (req, res, next) => {
     pageTitle: "Login",
     loginCSS: true,
     loginActive: true,
+    isAdmin: false
   });
 
 };
@@ -36,6 +37,11 @@ exports.PostLogin = (req, res, next) => {
         req.flash("errors", "Invalid email or username");
         return res.redirect("/login");
       }
+  ciudadano.findOne({where: {id: user.ciudadanoId}}).then((resul=>{
+    if(resul.dataValues.estado===false){
+      req.flash("errors", "Estas inactivo, no puedes ejercer el derecho a voto");
+      return res.redirect("/login");
+    }
 
       bcrypt
         .compare(password, user.password)
@@ -56,7 +62,9 @@ exports.PostLogin = (req, res, next) => {
           console.log(err);
           req.flash("errors", "An error has occurred contact the administrator.");
           res.redirect("/login");
-        });
+        })
+      }))
+
     })
     .catch((err) => {
       console.log(err);

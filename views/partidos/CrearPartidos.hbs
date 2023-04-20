@@ -28,7 +28,7 @@
                 <input type="file" placeholder="Inserte la URL del logo del partido" id="image" class="puesto-input"
                     name="Imagen" value="{{#if editMode}}{{partidos.logo}}{{/if}}">
             </div>
-            <div class="form-section">
+            <div class="form-section ps-s">
                 <label for="estado">Estado:</label><br>
                 <input type="radio" name="estado" value="activo" {{#if (equalValue partidos.estado true)}}
                     checked{{/if}}>Activo<br>
